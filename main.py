@@ -38,7 +38,8 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         logger.info('Processing user preferences')
         try:
-            api_key = extension.preferences['groq_api_key']
+            # Certifique-se de que esses IDs estão alinhados com o manifest.json
+            api_key = extension.preferences['api_key']  # ← Corrigido
             model = extension.preferences['model']
             line_wrap = int(extension.preferences['line_wrap'])
         except Exception as err:
@@ -76,9 +77,10 @@ class KeywordQueryEventListener(EventListener):
             ])
 
         endpoint = "https://api.groq.com/openai/v1/chat/completions "
+
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"
+            "Authorization": f"Bearer {api_key}"  # ← Corrigido
         }
 
         body = {

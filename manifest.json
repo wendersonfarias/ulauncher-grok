@@ -18,7 +18,7 @@
       "id": "api_key",
       "type": "input",
       "name": "Groq API Key",
-      "description": "Sua chave de API Groq (obtenha em https://groq.com)",
+      "description": "Sua chave de API Groq (obtenha em https://console.groq.com/keys )",
       "default_value": ""
     },
     {
