@@ -15,6 +15,7 @@ def wrap_text(text, max_w):
     words = text.split()
     lines = []
     current_line = ''
+
     for word in words:
         if len(current_line + ' ' + word) <= max_w:
             if current_line:
@@ -24,8 +25,10 @@ def wrap_text(text, max_w):
         else:
             lines.append(current_line.strip())
             current_line = word
+
     if current_line:
         lines.append(current_line.strip())
+
     return '\n'.join(lines)
 
 class GroqExtension(Extension):
@@ -38,8 +41,7 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         logger.info('Processing user preferences')
         try:
-            # Certifique-se de que esses IDs estão alinhados com o manifest.json
-            api_key = extension.preferences['api_key']  # ← Corrigido
+            api_key = extension.preferences['api_key']
             model = extension.preferences['model']
             line_wrap = int(extension.preferences['line_wrap'])
         except Exception as err:
@@ -77,10 +79,9 @@ class KeywordQueryEventListener(EventListener):
             ])
 
         endpoint = "https://api.groq.com/openai/v1/chat/completions "
-
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"  # ← Corrigido
+            "Authorization": f"Bearer {api_key}"
         }
 
         body = {
