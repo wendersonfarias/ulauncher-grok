@@ -84,7 +84,7 @@ class KeywordQueryEventListener(EventListener):
         endpoint = "https://api.groq.com/openai/v1/chat/completions"
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"
+            "Authorization": f"Bearer {groq_api_key}"
         }
         body = {
             "model": model,
