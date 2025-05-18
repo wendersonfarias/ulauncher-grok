@@ -5,28 +5,35 @@
   "developer_name": "Wenderson Farias",
   "icon": "images/icon.png",
   "options": {
-      "query_debounce": 2
+    "query_debounce": 2
   },
   "preferences": [
-      {
-          "id": "groq_kw",
-          "type": "keyword",
-          "name": "GROQ",
-          "default_value": "groq"
-      },
-      {
-          "id": "model",
-          "type": "input",
-          "name": "Modelo Groq",
-          "description": "Modelo para usar na API Groq",
-          "default_value": "llama-3.3-70b-versatile"
-      },
-      {
-          "id": "line_wrap",
-          "type": "input",
-          "name": "Tamanho da linha",
-          "description": "Máximo de caracteres por linha na resposta",
-          "default_value": "80"
-      }
+    {
+      "id": "groq_kw",
+      "type": "keyword",
+      "name": "GROQ",
+      "default_value": "groq"
+    },
+    {
+      "id": "groq_api_key",
+      "type": "input",
+      "name": "Groq API Key",
+      "description": "Sua chave de API Groq (obtenha em https://groq.com)",
+      "default_value": ""
+    },
+    {
+      "id": "model",
+      "type": "input",
+      "name": "Modelo Groq",
+      "description": "Modelo para usar na API Groq",
+      "default_value": "llama-3.3-70b-versatile"
+    },
+    {
+      "id": "line_wrap",
+      "type": "input",
+      "name": "Tamanho da linha",
+      "description": "Máximo de caracteres por linha na resposta",
+      "default_value": "80"
+    }
   ]
 }
