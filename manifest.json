@@ -4,6 +4,7 @@
   "description": "Assistant usando Groq API (modelo LLaMA 3.3 70B)",
   "developer_name": "Wenderson Farias",
   "icon": "images/icon.png",
+  "default_keyword": "groq",
   "options": {
       "query_debounce": 2
   },
