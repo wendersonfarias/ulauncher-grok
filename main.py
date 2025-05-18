@@ -41,6 +41,8 @@ class GroqExtension(Extension):
 
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
+
+        endpoint = "https://api.groq.com/openai/v1/chat/completions"
         logger.info('Processing user preferences')
         try:
             api_key = extension.preferences['groq_api_key']

@@ -4,17 +4,15 @@
   "description": "Assistant usando Groq API (modelo LLaMA 3.3 70B)",
   "developer_name": "Wenderson Farias",
   "icon": "images/icon.png",
-  "default_keyword": "groq",
   "options": {
       "query_debounce": 2
   },
   "preferences": [
       {
-          "id": "groq_api_key",
-          "type": "input",
-          "name": "Groq API Key",
-          "description": "Sua chave de API Groq (obtenha em https://groq.com)",
-          "default_value": ""
+          "id": "groq_kw",
+          "type": "keyboard",
+          "name": "GROQ",
+          "default_value": "groq"
       },
       {
           "id": "model",
