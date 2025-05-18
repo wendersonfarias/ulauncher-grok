@@ -15,19 +15,17 @@ def wrap_text(text, max_w):
     words = text.split()
     lines = []
     current_line = ''
-
     for word in words:
-        if not current_line:
-            current_line = word
-        elif len(current_line) + 1 + len(word) <= max_w:
-            current_line += ' ' + word
+        if len(current_line + ' ' + word) <= max_w:
+            if current_line:
+                current_line += ' ' + word
+            else:
+                current_line = word
         else:
-            lines.append(current_line)
+            lines.append(current_line.strip())
             current_line = word
-
     if current_line:
-        lines.append(current_line)
-
+        lines.append(current_line.strip())
     return '\n'.join(lines)
 
 class GroqExtension(Extension):
