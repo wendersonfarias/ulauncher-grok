@@ -6,31 +6,29 @@ from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.CopyToClipboardAction import CopyToClipboardAction
 from ulauncher.api.shared.action.DoNothingAction import DoNothingAction
-
 import requests
-import json
 
 logger = logging.getLogger(__name__)
 EXTENSION_ICON = 'images/icon.png'
-
 
 def wrap_text(text, max_w):
     words = text.split()
     lines = []
     current_line = ''
-    for word in words:
-        if len(current_line + ' ' + word) <= max_w:
-            if current_line:
-                current_line += ' ' + word
-            else:
-                current_line = word
-        else:
-            lines.append(current_line.strip())
-            current_line = word
-    if current_line:
-        lines.append(current_line.strip())
-    return '\n'.join(lines)
 
+    for word in words:
+        if not current_line:
+            current_line = word
+        elif len(current_line) + 1 + len(word) <= max_w:
+            current_line += ' ' + word
+        else:
+            lines.append(current_line)
+            current_line = word
+
+    if current_line:
+        lines.append(current_line)
+
+    return '\n'.join(lines)
 
 class GroqExtension(Extension):
     def __init__(self):
@@ -38,11 +36,8 @@ class GroqExtension(Extension):
         logger.info('Groq extension started')
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
 
-
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
-
-        endpoint = "https://api.groq.com/openai/v1/chat/completions"
         logger.info('Processing user preferences')
         try:
             api_key = extension.preferences['groq_api_key']
@@ -71,6 +66,7 @@ class KeywordQueryEventListener(EventListener):
 
         search_term = event.get_argument()
         logger.info('The search term is: %s', search_term)
+
         if not search_term:
             logger.info('Displaying blank prompt')
             return RenderResultListAction([
@@ -81,11 +77,12 @@ class KeywordQueryEventListener(EventListener):
                 )
             ])
 
-        endpoint = "https://api.groq.com/openai/v1/chat/completions"
+        endpoint = "https://api.groq.com/openai/v1/chat/completions "
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {groq_api_key}"
+            "Authorization": f"Bearer {api_key}"
         }
+
         body = {
             "model": model,
             "messages": [
@@ -131,7 +128,6 @@ class KeywordQueryEventListener(EventListener):
         ]
 
         return RenderResultListAction(items)
-
 
 if __name__ == '__main__':
     GroqExtension().run()
