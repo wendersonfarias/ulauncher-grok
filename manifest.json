@@ -10,7 +10,7 @@
   "preferences": [
       {
           "id": "groq_kw",
-          "type": "keyboard",
+          "type": "keyword",
           "name": "GROQ",
           "default_value": "groq"
       },
